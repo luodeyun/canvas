@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <title>根据城市设置城市中心点</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title>Document</title>
+    <style>
+    #container{
+        width:800px;
+        height: 600px
+    }
+    </style>
+
+</head>
+<body>
+    
+    <div id="container" ></div>
+</body>
+<script type="text/javascript" src="http://api.map.baidu.com/api?v=3.0&ak=C6BGUvAr4YhHhYKf99w7YBhDZ3CmC4gs"></script>
+<script>
+navigator.geolocation.getCurrentPosition(success)
+function success(positions){
+    let coords = positions.coords
+   // 创建地图实例
+    let map = new BMap.Map('container')
+     //创建坐标对象
+     let point = new BMap.Point(coords.longitude,coords.latitude)
+     let nc= map.addControl(new BMap.NavigationControl());
+     map.centerAndZoom(point,15);
+     map.enableScrollWheelZoom(true)
+     map.addControl(nc)
+}
+ 
+</script>
+</html>

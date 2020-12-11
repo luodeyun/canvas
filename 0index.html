@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+<style>
+    .demo{
+        border: 1px solid black
+    }
+</style>
+</head>
+<body>
+    <canvas class='demo' id='can'></canvas>
+</body>
+<script>
+    let can = document.getElementById('can')
+    can.width=400;
+    can.height=800;
+    let ctx1 = can.getContext('2d')
+    ctx1.font = 'bold  30px Microsoft  Yahei'
+      ctx1.fillText('web前端',100,100)
+      ctx1.strokeText('web前端',100,50)
+     
+</script>
+</html>

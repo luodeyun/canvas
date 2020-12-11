@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+    .demo{
+    border: 1px solid red
+    }
+    </style>
+    <title>Document</title>
+    
+</head>
+<body>
+    <canvas class='demo'></canvas>
+<script>
+ let canvasEle = document.querySelector('.demo')
+ canvasEle.width=300
+ canvasEle.height=300
+let x= 0;
+let y = 0;
+let Xdistance = 10
+let ctx = canvasEle.getContext('2d')
+
+ setInterval(()=>{
+    ctx.font='bold 14px Microsoft Yahei'
+     ctx.clearRect(0,0,canvasEle.width,canvasEle.height)
+     ctx.strokeRect(x,y,50,50)
+     ctx.fillText('中国',x+5,30)
+     x=x+Xdistance 
+     if(x>= canvasEle.width - 50){
+       Xdistance=-Xdistance
+         console.log(x); 
+     }else if(x<=0){
+       Xdistance =-Xdistance
+        console.log(x);
+     }
+
+ },300)
+
+</script>
+
+</body>
+</html>

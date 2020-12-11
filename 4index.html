@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+    
+    body,
+    p,
+    div,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    ol,
+    li,
+    dl,
+    dt,
+    dd,
+    form,
+    input,
+    select,
+    table,
+    tr,
+    th {
+      margin: 0;
+      padding: 0;
+    }
+
+    ul,
+    ol {
+      list-style: none;
+    }
+
+    #canvas {
+      display: block;
+      margin: 0 auto;
+      border: 1px solid #333;
+    }
+    #input-container{
+      width: 600px;      
+      margin:20px auto 0;
+    }
+  </style>
+</head>
+<body>
+    <canvas id="canvas" width="600" height="400"></canvas>
+    <div id="input-container">
+        <input id="text" type="text" placeholder="">
+        <select id="color">
+          <option value="#FE0302">#FE0302</option>
+          <option value="#FF7204">#FF7204</option>
+          <option value="#019899">#019899</option>
+          <option value="#019899">#019899</option>
+        </select>
+        <select id="speed">
+          <option value="2">慢</option>
+          <option value="4">普通</option>
+          <option value="6">快</option>
+        </select>
+        <button onclick="sendBubble()">发送</button>
+      </div>
+</body>
+<script>
+    let canvasEle = document.getElementById('canvas');
+    canvasEle.width = 600;
+    canvasEle.height = 400;
+    let ctx = canvasEle.getContext('2d');
+    ctx.font = '20px Microsoft Yahei';
+    /////////////////////////////////////////
+    class Bubble{   
+      constructor(text,color,speed){
+      
+        this.text = text;
+        this.x = canvasEle.width - 100;
+        this.y = 40 + Math.floor(Math.random() * 9) * 40;
+        this.color = color;
+        this.speed = speed;
+      }
+      draw(){
+        ctx.fillStyle = this.color;
+        ctx.fillText(this.text,this.x,this.y);
+      } 
+      update(){
+        this.x -= this.speed;
+      }      
+    }
+    let array = [];
+    function sendBubble(){
+      let textVal = document.getElementById('text').value;
+      let colorVal = document.getElementById('color').value;
+      let speedVal = document.getElementById('speed').value;
+      let bubble = new Bubble(textVal,colorVal,speedVal);
+      
+      array.push(bubble);
+      console.log(textVal);
+      textVal=''
+      console.log(textVal);
+      
+  
+      
+     
+    }
+    function animation(){
+      ctx.clearRect(0,0,canvasEle.width,canvasEle.height); 
+     
+      
+      array.forEach(bubble=>{
+        bubble.draw();  
+        bubble.update();
+      });      
+      window.requestAnimationFrame(animation);
+    }
+
+    animation();
+    
+var options = {
+    enableHighAccuracy: true,
+    timeout: 5000,
+    maximumAge: 0
+};
+function success(pos) {
+  console.log(pos);
+  var crd = pos.coords;
+  console.log('Your current position is:');
+  console.log('Latitude : ' + crd.latitude);
+  console.log('Longitude: ' + crd.longitude);
+  console.log('More or less ' + crd.accuracy + ' meters.');
+};
+function error(err) {
+  console.warn('ERROR(' + err.code + '): ' + err.message);
+};
+navigator.geolocation.getCurrentPosition(success,error,options);  
+
+</script>
+</html>

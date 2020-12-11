@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head> 
+<style>
+    ul,ol{
+        list-style: none
+    }
+    .canvas{
+        display: block;
+         /* border: 1px solid red */
+    }
+
+</style>
+<body>
+    <body>
+        <canvas class = 'canvas'></canvas>
+    
+    </body>
+    <script>
+    let canvasEle =document.querySelector('.canvas')
+    let chart =[
+        {laber:'手机通讯',value:203},
+        {laber:'家用家具',value:233},
+        {laber:'家庭用品',value:150},
+        {laber:'吃喝玩乐',value:97},
+        {laber:'男装女装',value:185},
+        ]
+        
+    console.log(canvasEle);
+    
+    canvasEle.width = 400;
+    canvasEle.height = 320;
+    //获取canvasRendderingcontext
+     let ctx = canvasEle.getContext('2d')
+    //柱形的宽度
+    let width = 30 
+    // ----------------------------------------
+  //绘制线
+     ctx.beginPath()
+     ctx.moveTo(10,  0);
+     ctx.lineTo(10  ,285);
+     ctx.lineTo(400,285)
+     ctx.stroke();  
+    // alert(ctx)
+    //绘制矩形
+     ctx.font='bold 14px Microsoft Yahei'
+    ctx.textAlign = 'center'
+for (let i = 0 ; i <= chart.length; i++ ){
+    
+    let Y = canvasEle.height-chart[i].value
+    let spacer = Math.ceil((canvasEle.width-(chart.length*width))/(chart.length+1))
+    console.log(spacer);
+    let X = (i+1)*spacer + i*width;
+    console.log(X,Y);
+     
+    ctx.fillStyle='#bfa'
+    ctx.fillRect(X,Y-20 ,width,chart[i].value-16)
+     //绘制填充的文本
+     ctx.fillStyle = '#000'
+     
+     ctx.fillText(chart[i].value,X+Math.ceil(width/2),Y-10)
+     ctx.fillText(chart[i].laber,X+Math.ceil(width/2),305)
+  }
+  //textAlign  文本的水平对其方式：
+   //设置：CanvasRenderingContext2D.textAlign = 'left|center|right'
+   //获取：
+    </script>
+</body>
+</html>
