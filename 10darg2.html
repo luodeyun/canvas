@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+    #box1{
+        width: 300px;
+        height: 300px;
+        border: 1px solid #f00;
+        margin: 10px;
+      
+    }
+    #box2{
+        width: 300px;
+        height: 300px;
+        border: 1px solid #00f;
+        margin: 10px;
+      
+    }
+</style>
+<body>
+    <div id="box1">
+        <p draggable ='true' id='p2'>wenben</p>
+    </div>
+    <div id="box2"></div>
+</body>
+<script>
+    let pEle = document.getElementById('p2')
+    pEle.addEventListener('dragstart',function(e){
+        console.log('dragstart 开始拖拽源对象');   
+        let dt = event.dataTransfer;
+        dt.setData('username',e.target.innerText)   
+        console.log(dt);
+         
+    })
+    // pEle.addEventListener ('drag', function(){
+    //     console.log('drag  拖放过程触发');
+    // })
+    // pEle.addEventListener('dragend',function(){
+    //     console.log('dragend 拖放');
+    // })
+    let divEle=document.getElementById('box2')
+    // divEle.addEventListener('dragenter',function(){
+    //     console.log(' dragenter进入目标对象时触发'); 
+    // })
+    divEle.addEventListener('dragover',function(e){
+        e.preventDefault()
+        console.log(' dragover进入目标对象范围内触发'); 
+    })
+    // divEle.addEventListener('dragleave',function(){
+    //     console.log('dragleave,离开目标对象');   
+    // })
+    divEle.addEventListener('drop',function(){
+        pEle.remove()
+        let dt = event.dataTransfer
+        let data=  dt.getData('username');
+        divEle.innerHTML=data
+       
+        console.log('drop,原对象在目标对象范围内释放');
+        
+    })
+</script>
+</html>

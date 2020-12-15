@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./axios.js"></script>
+    <style>
+    #region{
+        width: 600px;height: 300px;background-color: #b2eeae;
+    }
+    </style>
+</head>
+<body>
+    <div id="region"></div>
+</body>
+
+<script>  
+    let regionEle = document.getElementById('region');
+    regionEle.ondragover = function (event) {
+      event.preventDefault();
+    } 
+    regionEle.ondrop = function (event) {
+      event.preventDefault();
+      event.stopPropagation();
+      let filelist = event.dataTransfer.files;    
+      let formData = new FormData()
+      for (let n = 0; n < filelist.length; n++) {
+        formData.append('upload', filelist.item(n));
+      }      
+      axios.post('http://127.0.0.1:3006/upload',formData);    
+    }
+  
+</script>
+</html>

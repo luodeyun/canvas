@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<style>
+#container{
+    width: 600px;
+    text-align: center;
+    margin: auto;
+    border: 1px solid #333;
+   
+
+}    
+</style>
+<body>
+    <div id="container">
+       <p><input type="text" id='inputkuang'></p> 
+       <p><button onclick='postmessage()'>点我</button></p> 
+    </div>
+</body>
+<script>
+    function postmessage(){
+    let data = document.getElementById('inputkuang').value
+    
+    let worker = new Worker('./compute.js');  // 创建worker实例
+    worker.postMessage(data) //向worker发送消息
+    worker.onmessage = function(event){
+       console.log(event.data);
+      }   
+      console.log('2');
+       
+}
+    // 主线程接收worker发送过来的消息： 
+       //语法： worker.onmessage=function (event){}
+    // 监听worker发送的消息
+   
+     
+
+
+
+
+
+
+
+
+
+     
+   
+  
+</script>
+</html>
